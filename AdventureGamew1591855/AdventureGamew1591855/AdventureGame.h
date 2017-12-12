@@ -26,7 +26,7 @@ public:
 
 	void run(ifstream&, ofstream&);
 
-	char menuLoop(vector<AdventureRoom>&, int&);
+	char menuLoop(vector<AdventureRoom>&, int&, vector<string>&);
 
 	vector<AdventureRoom> readRoom(ifstream&, ofstream&);
 
@@ -34,6 +34,7 @@ public:
 
 	vector<Door*> setDoors(vector<int>);
 
+	void checkMotion(int, int, Player&, MotionTableEntry&, bool&);
 };
 
 #endif

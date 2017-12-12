@@ -40,7 +40,7 @@ public:
 	
 	void setMoves(int);
 
-	void addMove();
+	void addMove(int);
 
 private:
 	string name;

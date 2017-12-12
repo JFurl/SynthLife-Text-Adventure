@@ -4,16 +4,18 @@
 #include <iostream>
 #include <sstream>
 
-
+#pragma region declarations
 using namespace std;
-
+const bool TRUE = TRUE;
+bool drawn;
 AdditionalFunctions af;
 Player player;
+#pragma endregion
 
-const bool TRUE = TRUE;
+
 
 AdventureGame::AdventureGame() {
-
+	
 }
 
 int AdventureGame::mainMenuLoop(ifstream& inFile, ofstream& outFile) {
@@ -59,23 +61,22 @@ void AdventureGame::run(ifstream& inFile, ofstream& outFile) {
 	int previousRoom = 1;
 	Key* startingItem = new Key("Destroyed Key", "It looks like a key but it's destroyed.");
 	startingItem->setCorrispondingObject(10);
-	//vector<Door*> doors;
+	vector<string> updates;
 	vector<AdventureRoom>& allRooms = readRoom(inFile, outFile);
 	cout << "Please Enter Your Player Name: \n" << endl;
 	getline(cin, name);
 	player.setName(name);
 	player.addToInventory(startingItem);
 	system("cls");
-	displayCurrentRoom(allRooms, player);
 
 	while (exitValue != 'X')
 	{
-		exitValue = menuLoop(allRooms, previousRoom);
+		exitValue = menuLoop(allRooms, previousRoom, updates);
 	}
 
 }
 
-char AdventureGame::menuLoop(vector<AdventureRoom>& allRooms,int& previousRoom) {
+char AdventureGame::menuLoop(vector<AdventureRoom>& allRooms, int& previousRoom, vector<string>& updates) {
 
 	char menuChoice;
 	string input;
@@ -83,16 +84,29 @@ char AdventureGame::menuLoop(vector<AdventureRoom>& allRooms,int& previousRoom) 
 	int curRm = player.getCurrentRoom();
 	allRooms[curRm - 1].setRoomVisited(TRUE);
 	MotionTableEntry& motion = allRooms[curRm - 1].getMotionTable();
+	stringstream updateString;
 
-	cout << "\nWhat Would You Like To Do?\n" << endl;
-	cout << "Type HELP for instructions." << endl;
+	if (updates.size() > 0) {
+		if (updates[0] != "") {
+			cout << updates[0] << endl;
+			updates.clear();
+		}
+		else {
+			system("cls");
+			displayCurrentRoom(allRooms, player);
+			updates.clear();
+		}
+	}
+	else {
+		system("cls");
+		displayCurrentRoom(allRooms, player);
+		updates.clear();
+	}
+
 	cin.sync();
 	getline(cin, input);
 	menuChoice = af.playerInput(input);
-
-	player.addMove(previousRoom);
 	previousRoom = player.getCurrentRoom();
-	
 
 	if (player.getCurrentRoom() == 6) {
 		menuChoice = 'A';
@@ -101,144 +115,73 @@ char AdventureGame::menuLoop(vector<AdventureRoom>& allRooms,int& previousRoom) 
 	switch (menuChoice)
 	{
 	case 'N':
-		system("cls");
-		for (int i = 0; i < player.getInventory().size(); i++) {
-			if (motion.getDoors()[0]->getCorrispondingObject() == player.getInventory()[i]->getCorrispondingObject() || motion.getDoors()[0]->getCorrispondingObject() == 0) {
-				player.setCurrentRoom(motion.getConnectingRoomN());
-				truVal = true;
-				break;
-			}
-		}
-			if (!truVal) {
-				cout << "This Door Is Locked.\n";
-				player.setCurrentRoom(previousRoom);
-			}
-		
-		if (player.getCurrentRoom() == 0) {
-			cout << "You cannot go that way from here." << endl;
-			player.setCurrentRoom(previousRoom);
-		}
-		displayCurrentRoom(allRooms, player);
+		checkMotion(0, previousRoom, player, motion, truVal);
 		truVal = false;
 		break;
 
 	case 'S':
-		for (int i = 0; i < player.getInventory().size(); i++) {
-			if (motion.getDoors()[1]->getCorrispondingObject() == player.getInventory()[i]->getCorrispondingObject() || motion.getDoors()[1]->getCorrispondingObject() == 0) {
-				player.setCurrentRoom(motion.getConnectingRoomS());
-				truVal = true;
-				break;
-			}
-		}
-			if (!truVal) {
-				cout << "This Door Is Locked";
-				player.setCurrentRoom(previousRoom);
-			}
-		
-		if (player.getCurrentRoom() == 0) {
-			cout << "You cannot go that way from here." << endl;
-			player.setCurrentRoom(previousRoom);
-		}
-		displayCurrentRoom(allRooms, player);
+		checkMotion(1, previousRoom, player, motion, truVal);
 		truVal = false;
 		break;
 
 	case 'E':
-		for (int i = 0; i < player.getInventory().size(); i++) {
-			if (motion.getDoors()[2]->getCorrispondingObject() == player.getInventory()[i]->getCorrispondingObject() || motion.getDoors()[2]->getCorrispondingObject() == 0) {
-				player.setCurrentRoom(motion.getConnectingRoomE());
-				truVal = true;
-				break;
-			}
-		}
-			if (!truVal) {
-				cout << "This Door Is Locked";
-				player.setCurrentRoom(previousRoom);
-				
-			}
-		
-		if (player.getCurrentRoom() == 0) {
-			cout << "You cannot go that way from here." << endl;
-			player.setCurrentRoom(previousRoom);
-		}
-		displayCurrentRoom(allRooms, player);
+		checkMotion(2, previousRoom, player, motion, truVal);
 		truVal = false;
 		break;
 
 	case 'W':
-		for (int i = 0; i < player.getInventory().size(); i++) {
-			if (motion.getDoors()[3]->getCorrispondingObject() == player.getInventory()[i]->getCorrispondingObject() || motion.getDoors()[3]->getCorrispondingObject() == 0) {
-				player.setCurrentRoom(motion.getConnectingRoomW());
-				truVal = true;
-				break;
-			}
-		}
-			if (!truVal) {
-				cout << "This Door Is Locked";
-				player.setCurrentRoom(previousRoom);
-				
-			}
-		
-		if (player.getCurrentRoom() == 0) {
-			cout << "You cannot go that way from here." << endl;
-			player.setCurrentRoom(previousRoom);
-		}
-		displayCurrentRoom(allRooms, player);
+		checkMotion(3, previousRoom, player, motion, truVal);
 		truVal = false;
 		break;
 
 	case'K':
-		system("cls");
 		if (allRooms[curRm - 1].getObject("KEY")->getOwned() == true) {
-			cout << "Nothing to pick up." << endl;
+			updateString << "Nothing to pick up." << endl;
 		}
 		else {
 			player.addToInventory(allRooms[curRm - 1].getObject("KEY"));
-			cout << allRooms[curRm - 1].getObject("KEY")->getName() << " was added to your inventory." << endl;
+			updateString << allRooms[curRm - 1].getObject("KEY")->getName() << " was added to your inventory." << endl;
 		}
 		break;
 
 	case'B':
-		system("cls");
+
 		if (allRooms[curRm - 1].getObject("BOOK")->getOwned() == true) {
-			cout << "Nothing to pick up." << endl;
+			updateString << "Nothing to pick up." << endl;
 		}
 		else {
 			player.addToInventory(allRooms[curRm - 1].getObject("BOOK"));
-			cout << allRooms[curRm - 1].getObject("BOOK")->getName() << " was added to your inventory." << endl;
+			updateString << allRooms[curRm - 1].getObject("BOOK")->getName() << " was added to your inventory." << endl;
 		}
 		break;
 
-	case 'L': 
-		system("cls");
-		displayCurrentRoom(allRooms, player);
+	case 'L':
 		player.displayInvetoryDesc();
 		break;
 
 	case 'I':
-		system("cls");
-		displayCurrentRoom(allRooms, player);
 		player.displayInventory();
 		break;
 
 	case'H':
-		system("cls");
 		af.drawHelp();
-		displayCurrentRoom(allRooms, player);
 		break;
+
 	case 'A':
-		system("cls");
-		cout << "You Win!" << endl;
+		updateString << "You Win!" << endl;
 		break;
+
 	case 'Z':
-		cout << "Please Enter A Valid Input." << endl;
-		displayCurrentRoom(allRooms, player);
+		updateString << "Please Enter A Valid Input." << endl;
 		break;
 
 	case'Q':
 		exit(0);
 		break;
 	}
+
+	updates.push_back(updateString.str());
+	updateString.clear();
 
 	return menuChoice;
 }
@@ -319,6 +262,8 @@ void AdventureGame::displayCurrentRoom(vector<AdventureRoom>& allRooms, Player& 
 	af.drawTitle(player);
 	MotionTableEntry& motion = allRooms[curRm - 1].getMotionTable();
 	cout << allRooms[curRm - 1].getName() << "\n" << allRooms[curRm - 1].getDescription() << endl;
+	cout << "\nWhat Would You Like To Do?" << endl;
+	cout << "Type HELP for instructions.\n" << endl;
 }
 
 vector<Door*> AdventureGame::setDoors(vector<int> corrispondingObject)
@@ -334,7 +279,39 @@ vector<Door*> AdventureGame::setDoors(vector<int> corrispondingObject)
 	return doors;
 }
 
+void AdventureGame::checkMotion(int direction, int previousRoom, Player& player, MotionTableEntry& motion, bool& truVal) {
+	for (int i = 0; i < player.getInventory().size(); i++) {
+		if (motion.getDoors()[direction]->getCorrispondingObject() == player.getInventory()[i]->getCorrispondingObject() || motion.getDoors()[direction]->getCorrispondingObject() == 0) {
+			if (direction == 0) {
+				player.setCurrentRoom(motion.getConnectingRoomN());
+				player.addMove(previousRoom);
+			}
+			else if (direction == 1) {
+				player.setCurrentRoom(motion.getConnectingRoomS());
+				player.addMove(previousRoom);
+			}
+			else if (direction == 2) {
+				player.setCurrentRoom(motion.getConnectingRoomE());
+				player.addMove(previousRoom);
+			}
+			else if (direction == 3) {
+				player.setCurrentRoom(motion.getConnectingRoomW());
+				player.addMove(previousRoom);
+			}
+			truVal = true;
+			break;
+		}
+	}
+	if (!truVal) {
+		cout << "This Door Is Locked.\n";
+		player.setCurrentRoom(previousRoom);
+	}
 
+	if (player.getCurrentRoom() == 0) {
+		cout << "You cannot go that way from here." << endl;
+		player.setCurrentRoom(previousRoom);
+	}
+}
 
 
 
