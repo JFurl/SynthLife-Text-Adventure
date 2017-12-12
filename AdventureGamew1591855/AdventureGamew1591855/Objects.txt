@@ -1,0 +1,30 @@
+KEY|
+Office Key|
+This key has 'Office Key' written on it.|
+|
+|
+1| 1|
+KEY|
+Roof Key|
+This key has 'Roof' written on it.|
+|
+|
+2|3|
+KEY|
+Testing Room Key|
+This key has 'Testing Room' written on it.|
+|
+|
+3|4|
+BOOK|
+Android Repair Manual|
+The book describes the process of reseting an android to it's last working state.|
+It seems simple enough, there is a button located on the back of the neck that must be held down for several seconds.|
+|
+0|4|
+BOOK|
+Tech Monthly Magazine|
+The front cover has a picture of a shiny robotic face with the words "NEW WORLD ORDER" written over the top in white.|
+There is an interview with the CEO and Founder of SynthLife Corp.|
+The interview is extremely interesting. He believes he is close to creating a consious being.|
+0|1|

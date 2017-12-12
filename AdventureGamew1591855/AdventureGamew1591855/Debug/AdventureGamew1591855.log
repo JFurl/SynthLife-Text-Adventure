@@ -1,0 +1,5 @@
+﻿  AdditionalFunctions.cpp
+c:\users\james\documents\visual studio 2017\projects\adventuregamew1591855\adventuregamew1591855\additionalfunctions.cpp(79): warning C4018: '<': signed/unsigned mismatch
+c:\users\james\documents\visual studio 2017\projects\adventuregamew1591855\adventuregamew1591855\additionalfunctions.cpp(73): warning C4715: 'AdditionalFunctions::playerInput': not all control paths return a value
+  AdventureGamew1591855.vcxproj -> C:\Users\James\documents\visual studio 2017\Projects\AdventureGamew1591855\Debug\AdventureGamew1591855.exe
+  AdventureGamew1591855.vcxproj -> C:\Users\James\documents\visual studio 2017\Projects\AdventureGamew1591855\Debug\AdventureGamew1591855.pdb (Partial PDB)

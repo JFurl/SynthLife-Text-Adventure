@@ -1,0 +1,63 @@
+1|
+Dark Office|
+The room in front of you is mostly dark. A stream of yellow light coming in from the slatted blinds to your left.| 
+Outside you can see a neon-hued city of high-rise buildings stretching on for what seems like forever.|
+The room has only a door on the NORTH wall and a table at its centre. There appears to be a KEY and BOOK on the table.|
+NORTH| 2| 1|
+SOUTH| 0| 0|
+EAST| 0| 0|
+WEST| 0| 0|
+2|
+Main Hallway|
+The Hallway is lit by dull laps on either side. There are four doors.|
+The door on the NORTH wall says 'R&D'. The SOUTH door says 'Accounting'.|
+The door on the EAST wall says 'Storage'. The WEST door says 'Roof'.|
+NORTH| 3| 0|
+SOUTH| 1| 0|
+EAST| 4| 0|
+WEST| 5| 2|
+3|
+R&D|
+A large white room with machinery all over the place. There appear to be androids hung up everywhere on metal hooks.|
+There is a hole, large enough for a person, in the WEST wall and debris all over the floor. Something came through here or...left in a hurry.|
+Sitting on the table in the middle of the room you see a KEY. There is large mechanical door to the NORTH.|
+NORTH| 6| 3|
+SOUTH| 2| 0|
+EAST| 0| 0|
+WEST| 7| 0|
+4|
+Storage|
+A small storage cupboard with a small light hanging from the ceiling and a small vent that is out of reach on the wall.|
+There is a small KEY on the second shelf down.|
+A BOOK on android repair sits next to a robotic arm.|
+NORTH| 0| 0|
+SOUTH| 0| 0|
+EAST| 0| 0|
+WEST| 2| 0|
+5|
+Roof|
+The rain pours hard and the fibrant-neon, emanating from the city around you, lights up the night in all directions.|
+Something gives you a chill about being up here; you're not sure what. There is a small vent you could squeeze in to the EAST|
+You spot a BOX on the other side of the roof.|
+NORTH| 0| 0|
+SOUTH| 2| 0|
+EAST| 4| 0|
+WEST| 0| 0|
+6|
+Testing Room|
+There is what appears to be a partially functioning android slumped in one corner. Only their head and torso remain.|
+There are Parts strewn all over the room, half built androids are piled up everywhere.|
+You could attempt to talk to the Android. There is no other way out than where you came in.|
+NORTH| 0| 0|
+SOUTH| 3| 0|
+EAST| 0| 0|
+WEST| 0| 0|
+7|
+Road|
+The city towers above you. The rain drenches you. There is a pile of smashed cars in your way stopping you from going father.|
+There is a robotic arm laying on the ground.|
+There is little else of note.|
+NORTH| 0| 0|
+SOUTH| 0| 0|
+EAST| 3| 0|
+WEST| 0| 0|
