@@ -1,0 +1,6 @@
+﻿  AdventureGame.cpp
+c:\users\w1591855\desktop\synthlife-text-adventure-master\adventuregamew1591855\adventuregamew1591855\adventuregame.cpp(224): warning C4129: '|': unrecognized character escape sequence
+c:\users\w1591855\desktop\synthlife-text-adventure-master\adventuregamew1591855\adventuregamew1591855\adventuregame.cpp(229): warning C4129: '|': unrecognized character escape sequence
+c:\users\w1591855\desktop\synthlife-text-adventure-master\adventuregamew1591855\adventuregamew1591855\adventuregame.cpp(318): warning C4018: '<': signed/unsigned mismatch
+  AdventureGamew1591855.vcxproj -> C:\Users\w1591855\Desktop\SynthLife-Text-Adventure-master\AdventureGamew1591855\Debug\AdventureGamew1591855.exe
+  AdventureGamew1591855.vcxproj -> C:\Users\w1591855\Desktop\SynthLife-Text-Adventure-master\AdventureGamew1591855\Debug\AdventureGamew1591855.pdb (Partial PDB)
